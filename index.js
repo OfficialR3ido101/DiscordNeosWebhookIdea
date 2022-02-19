@@ -6,11 +6,11 @@ const bot = require('./init-bot')
 
 const commands = [
   new SlashCommandBuilder().setName('forward')
-  .setDescription('moves block +1').addStringOption(opt => opt.setName("funits").setDescription("How far you want this shit to go forwards")),
+  .setDescription('moves block +1').addStringOption(opt => opt.setName("funits").setDescription("How far you want this shit to go forwards").setRequired(true)),
   new SlashCommandBuilder().setName('backwards')
-  .setDescription('moves block -1').addStringOption(opt => opt.setName("bunits").setDescription("How far you want this shit to go backwards Do not include (-)")),
+  .setDescription('moves block -1').addStringOption(opt => opt.setName("bunits").setDescription("How far you want this shit to go backwards Do not include (-)").setRequired(true)),
   new SlashCommandBuilder().setName('invis')
-  .setDescription("Makes things go and cum back").addBooleanOption(opt => opt.setName("status").setDescription("Enable or disable items in neos")),
+  .setDescription("Makes things go and come back").addBooleanOption(opt => opt.setName("status").setDescription("Enable or disable items in neos").setRequired(true)),
 ].map(command => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(cfg.discord.token);
