@@ -32,37 +32,35 @@ module.exports.init = function () {
             sockets = sockets.filter(s => s !== socket);
         });
     });
-    var thing = 0;
+    
     client.on('interactionCreate', async interact => {
         if (!interact.isCommand) return;
 
         switch (interact.commandName) {
             case "forward":
+                var farg = interact.options.getString("funits");
                 thing + 1;
                 server.emit("thing", {
-                    thing: interact.options.getString("funits")
+                    thing: farg
                 })
-                console.log("+1")
-                interact.reply("+1")
+                interact.reply(farg)
                 break;
 
             case "backwards":
-                thing = 0;
+                var barg = interact.options.getString("bunits");
                 server.emit("thing", {
-                    thing: "-" + interact.options.getString("bunits")
+                    thing: "-" + barg
                 })
-                console.log("-1");
-                interact.reply("-1")
+                interact.reply(barg)
                 break;
 
             case "invis":
+                let status = interact.options.getBoolean('status').toString();
                 server.emit("thing", {
-                    thing: interact.options.getBoolean('status').toString()
+                    thing: status
                 })
-                console.log("magic!")
-                interact.reply("magic!")
+                interact.reply("magic!" + ` ${status}`)
                 break;
         }
     })
-
 }
